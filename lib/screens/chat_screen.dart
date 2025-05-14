@@ -26,7 +26,7 @@ class _ChatScreenState extends State<ChatScreen> {
     return Scaffold(
       bottomNavigationBar: Container(
         height: 100,
-        color: Colors.red,
+        color: Colors.green,
         child: Row(
           children: [
             Expanded(child: TextField(controller: controller)),
