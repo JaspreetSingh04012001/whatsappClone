@@ -20,40 +20,87 @@ class AppIcons {
         : "assets/icons/lightThemeIcons/Community.png";
   }
 
-  static String callIcon() {
+  static String addcallIcon() {
     return isDarkMode()
-        ? "assets\icons\darkThemeIcons\callicon(1)(1).png"
-        : "assets\icons\lightThemeIcons\callicon(1)(1).png";
+        ? "assets/icons/lightThemeIcons/icons8-call-50.png"
+        : "assets/icons/darkThemeIcons/icons8-call-50.png";
   }
 
-  static String micIcon() {
+  static String addmicIcon() {
     return isDarkMode()
-        ? "assets\icons\lightThemeIcons\icons8-mic-24.png"
-        : "assets\icons\darkThemeIcons\icons8-mic-24.png";
+        ? "assets/icons/lightThemeIcons/icons8-mic-24.png"
+        : "assets/icons/darkThemeIcons/cons8-mic-24.png";
   }
 
-  static String cameraIcon() {
+  static String addcameraIcon() {
     return isDarkMode()
-        ? "assets\icons\darkThemeIcons\icons8-camera-32.png"
-        : "assets\icons\lightThemeIcons\icons8-camera-32.png";
+        ? "assets/icons/darkThemeIcons/icons8-camera-32.png"
+        : "assets/icons/lightThemeIcons/icons8-camera-32.png";
   }
 
-  static String plusIcon() {
+  static String addplusIcon() {
     return isDarkMode()
-        ? "assets\icons\darkThemeIcons\icons8-plus-math-50.png"
-        : "assets\icons\lightThemeIcons\icons8-plus-math-50.png";
+        ? "assets/icons/darkThemeIcons/icons8-plus-math-50.png"
+        : "assets/icons/lightThemeIcons/icons8-plus-math-50.png";
   }
 
-  static String StickerIcon() {
+  static String addStickerIcon() {
     return isDarkMode()
-        ? "assets\icons\darkThemeIcons\icons8-sticker-32.png"
-        : "assets\icons\lightThemeIcons\icons8-sticker-32.png";
+        ? "assets/icons/darkThemeIcons/stickerdark,.png"
+        : "assets/icons/lightThemeIcons/stickerslight.png";
   }
 
-  static String videoicallIcon() {
+  static String addvideoicallIcon() {
     return isDarkMode()
-        ? "assets\icons\darkThemeIcons\icons8-video-call-25.png"
-        : "assets\icons\lightThemeIcons\icons8-video-call-25.png";
+        ? "assets/icons/darkThemeIcons/icons8-video-call-25 (1).png"
+        : "assets/icons/lightThemeIcons/icons8-video-call-24.png";
+  }
+
+  static String addstatuseditIcon() {
+    return isDarkMode()
+        ? "assets/icons/darkThemeIcons/icons8-edit-50.png"
+        : "assets/icons/lightThemeIcons/icons8-edit-50.png";
+  }
+
+  static String addStatuscameraIcon() {
+    return isDarkMode()
+        ? "assets/icons/darkThemeIcons/icons8-add-camera-48.png"
+        : "assets/icons/lightThemeIcons/icons8-add-camera-48.png";
+  }
+
+  static String addplusIco() {
+    return isDarkMode()
+        ? "assets/icons/darkThemeIcons/icons8-plus-48.png"
+        : "assets/icons/lightThemeIcons/icons8-plus-48.png";
+  }
+
+  static String addpaymentIcon() {
+    return isDarkMode()
+        ? "assets/icons/darkThemeIcons/icons8-exchange-rupee-50.png"
+        : "assets/icons/lightThemeIcons/rupeeslight.png";
+  }
+
+  static String addArchieveIcon() {
+    return isDarkMode()
+        ? "assets/icons/darkThemeIcons/icons8-archive-folder-50.png"
+        : "assets/icons/ightThemeIcons/icons8-archive-50.png";
+  }
+
+  static String addMissedcallIcon() {
+    return isDarkMode()
+        ? "assets/icons/darkThemeIcons/icons8-missed-call-50 (1).png"
+        : "assets/icons/lightThemeIcons/icons8-missed-call-50.png";
+  }
+
+  static String addIncommingcallIcon() {
+    return isDarkMode()
+        ? "assets/icons/darkThemeIcons/icons8-incoming-call-50 (1).png"
+        : "assets/icons/lightThemeIcons/icons8-incoming-call-50 (2).png";
+  }
+
+  static String addDisconnecctallIcon() {
+    return isDarkMode()
+        ? "assets/icons/darkThemeIcons/icons8-call-disconnected-50.png"
+        : "assets/icons/lightThemeIcons/icons8-call-disconnected-32.png";
   }
 }
-//this is icons
