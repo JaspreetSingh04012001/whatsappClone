@@ -55,5 +55,10 @@ class AppIcons {
         ? "assets/icons/darkThemeIcons/icons8-video-call-25.png"
         : "assets/icons/lightThemeIcons/icons8-video-call-25.png";
   }
+  
+  static String chatBackGround() {
+    return "assets/images/chatBackground.png";
+  }
+
 }
 //this is icons
