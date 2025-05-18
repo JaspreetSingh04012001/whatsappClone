@@ -13,6 +13,7 @@ class AppIcons {
         ? "assets/icons/darkThemeIcons/darkWhatsAppIcon.png"
         : "assets/icons/lightThemeIcons/lightWhatsAppIcon.png";
   }
+
   static String communityIcon() {
     return isDarkMode()
         ? "assets/icons/darkThemeIcons/Community.png"
