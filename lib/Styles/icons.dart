@@ -19,4 +19,8 @@ class AppIcons {
         ? "assets/icons/darkThemeIcons/Community.png"
         : "assets/icons/lightThemeIcons/Community.png";
   }
+
+  static String chatBackGround() {
+    return "assets/images/chatBackground.png";
+  }
 }

@@ -63,7 +63,7 @@ flutter:
   assets:
     - assets/icons/lightThemeIcons/
     - assets/icons/darkThemeIcons/
-    - assets/icons/lightThemeIcons/image.png
+    - assets/images/
     
 
   # An image asset can refer to one or more resolution-specific "variants", see

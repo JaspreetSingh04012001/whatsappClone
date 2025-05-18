@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:whatsappclone/Data/Model/chat_tile_user.dart';
 import 'package:whatsappclone/Data/Model/message.dart';
+import 'package:whatsappclone/Styles/icons.dart';
 
 // ignore: must_be_immutable
 class ChatScreen extends StatefulWidget {
@@ -95,7 +96,7 @@ class _ChatScreenState extends State<ChatScreen> {
           Container(
             decoration: BoxDecoration(
               image: DecorationImage(
-                image: AssetImage('assets/icons/lightThemeIcons/image.png'),
+                image: AssetImage(AppIcons.chatBackGround()),
                 fit: BoxFit.cover,
               ),
             ),
