@@ -10,28 +10,39 @@ class ChatsScreen extends StatefulWidget {
   @override
   State<ChatsScreen> createState() => _ChatsScreenState();
 }
+List<ChatTileUser> users = [
+  ChatTileUser(
+    lastMessage: "Chhhll bhag",
+    isOnline: true,
+    lastMessageTime: DateTime.now(),
+    username: "jass",
+  ),
+  ChatTileUser(
+    lastMessage: "Hi how are you",
+    isOnline: true,
+    lastMessageTime: DateTime.now(),
+    username: "Raman",
+  ),
+  ChatTileUser(
+    lastMessage: "College nee aana kya",
+    isOnline: true,
+    lastMessageTime: DateTime.now(),
+    username: "Pooja",
+  ),
+];
 
+var Newuser = users.add(
+  ChatTileUser(
+    isOnline: true,
+    lastMessage: "this is something new",
+    lastMessageTime: DateTime.now(),
+    username: "pagal",
+    profilePicture:
+    "https://randomuser.me/api/portraits/women/${users.length}.jpg",
+  ),
+);
 class _ChatsScreenState extends State<ChatsScreen> {
-  List<ChatTileUser> users = [
-    ChatTileUser(
-      lastMessage: "Chhhll bhag",
-      isOnline: true,
-      lastMessageTime: DateTime.now(),
-      username: "jass",
-    ),
-    ChatTileUser(
-      lastMessage: "Hi how are you",
-      isOnline: true,
-      lastMessageTime: DateTime.now(),
-      username: "Raman",
-    ),
-    ChatTileUser(
-      lastMessage: "College nee aana kya",
-      isOnline: true,
-      lastMessageTime: DateTime.now(),
-      username: "Pooja",
-    ),
-  ];
+
 
   @override
   Widget build(BuildContext context) {
@@ -39,16 +50,7 @@ class _ChatsScreenState extends State<ChatsScreen> {
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           setState(() {
-            users.add(
-              ChatTileUser(
-                isOnline: true,
-                lastMessage: "this is something new",
-                lastMessageTime: DateTime.now(),
-                username: "pagal",
-                profilePicture:
-                    "https://randomuser.me/api/portraits/women/${users.length}.jpg",
-              ),
-            );
+            Newuser;
           });
         },
         child: Icon(Icons.message),
