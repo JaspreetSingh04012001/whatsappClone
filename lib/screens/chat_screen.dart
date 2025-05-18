@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:whatsappclone/Data/Model/chat_tile_user.dart';
 import 'package:whatsappclone/Data/Model/message.dart';
 
+// ignore: must_be_immutable
 class ChatScreen extends StatefulWidget {
   ChatScreen({super.key, required this.userChatTile});
   ChatTileUser userChatTile;
@@ -89,33 +90,48 @@ class _ChatScreenState extends State<ChatScreen> {
           IconButton(onPressed: () {}, icon: Icon(Icons.video_call)),
         ],
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: ListView.builder(
-          itemCount: messages.length,
-          itemBuilder: (context, index) {
-            bool isMymessage = messages[index].messageSendBy == "you";
-            return Row(
-              mainAxisAlignment:
-                  isMymessage ? MainAxisAlignment.end : MainAxisAlignment.start,
-              children: [
-                Container(
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(18),
-                    color: isMymessage ? Colors.grey.shade500 : Colors.green,
-                  ),
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(
-                      vertical: 8,
-                      horizontal: 22,
+      body: Stack(
+        children: [
+          Container(
+            decoration: BoxDecoration(
+              image: DecorationImage(
+                image: AssetImage('assets/icons/images/image.png'),
+                fit: BoxFit.cover,
+              ),
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: ListView.builder(
+              itemCount: messages.length,
+              itemBuilder: (context, index) {
+                bool isMymessage = messages[index].messageSendBy == "you";
+                return Row(
+                  mainAxisAlignment:
+                      isMymessage
+                          ? MainAxisAlignment.end
+                          : MainAxisAlignment.start,
+                  children: [
+                    Container(
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(18),
+                        color:
+                            isMymessage ? Colors.grey.shade500 : Colors.green,
+                      ),
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(
+                          vertical: 8,
+                          horizontal: 22,
+                        ),
+                        child: Text(messages[index].value.toString()),
+                      ),
                     ),
-                    child: Text(messages[index].value.toString()),
-                  ),
-                ),
-              ],
-            );
-          },
-        ),
+                  ],
+                );
+              },
+            ),
+          ),
+        ],
       ),
     );
   }

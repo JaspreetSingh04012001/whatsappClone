@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
 
 class StatusScreen extends StatelessWidget {
-const StatusScreen({ Key? key }) : super(key: key);
+  const StatusScreen({super.key});
 
   @override
-  Widget build(BuildContext context){
- return Scaffold(
-      body: Center(child: Text("Status Screen"),),
-    );
+  Widget build(BuildContext context) {
+    return Scaffold(body: Center(child: Text("Status Screen")));
   }
 }
