@@ -26,6 +26,7 @@ class _ChatScreenState extends State<ChatScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      bottomNavigationBar: inputField(),
       appBar: AppBar(
         leadingWidth: 30,
         title: Row(
@@ -34,11 +35,12 @@ class _ChatScreenState extends State<ChatScreen> {
             Padding(
               padding: const EdgeInsets.fromLTRB(0, 0, 4, 0),
               child: CircleAvatar(
-                foregroundImage: widget.userChatTile.profilePicture == null
-                    ? null
-                    : NetworkImage(
-                        widget.userChatTile.profilePicture.toString(),
-                      ),
+                foregroundImage:
+                    widget.userChatTile.profilePicture == null
+                        ? null
+                        : NetworkImage(
+                          widget.userChatTile.profilePicture.toString(),
+                        ),
               ),
             ),
             Column(
@@ -106,45 +108,50 @@ class _ChatScreenState extends State<ChatScreen> {
       ),
     );
   }
- Widget inputField() {
-  return SafeArea(
-    child: Container(
-      padding: EdgeInsets.symmetric(horizontal: 8, vertical: 6),
-      child: Row(
-        children: [
-          IconButton(
-            icon: Image.asset(AppIcons.plusIcon(), height: 35),
-            onPressed: () {},
-          ),
-          Expanded(
-            child: SizedBox(
-              height: 45.0,
-              child: TextField(
-                decoration: InputDecoration(
-                  contentPadding: EdgeInsets.symmetric(horizontal: 16, vertical: 14),
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(40),
-                    borderSide: BorderSide.none,
-                  ),
-                  suffixIcon: IconButton(
-                    icon: Image.asset(AppIcons.stickerIcon(), height: 30),
-                    onPressed: () {},
+
+  Widget inputField() {
+    return SafeArea(
+      child: Container(
+        color: Theme.of(context).appBarTheme.backgroundColor,
+        padding: EdgeInsets.symmetric(horizontal: 0, vertical: 16),
+        child: Row(
+          children: [
+            IconButton(
+              icon: Image.asset(AppIcons.plusIcon(), height: 35),
+              onPressed: () {},
+            ),
+            Expanded(
+              child: SizedBox(
+                height: 45.0,
+                child: TextField(
+                  decoration: InputDecoration(
+                    contentPadding: EdgeInsets.symmetric(
+                      horizontal: 16,
+                      vertical: 14,
+                    ),
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(40),
+                      borderSide: BorderSide.none,
+                    ),
+                    suffixIcon: IconButton(
+                      icon: Image.asset(AppIcons.stickerIcon(), height: 30),
+                      onPressed: () {},
+                    ),
                   ),
                 ),
               ),
             ),
-          ),
-          IconButton(
-            icon: Image.asset(AppIcons.cameraIcon(), height: 30),
-            onPressed: () {},
-          ),
-          IconButton(
-            icon: Image.asset(AppIcons.micIcon(), height: 30),
-            onPressed: () {},
-          ),
-        ],
+            IconButton(
+              icon: Image.asset(AppIcons.cameraIcon(), height: 30),
+              onPressed: () {},
+            ),
+            IconButton(
+              icon: Image.asset(AppIcons.micIcon(), height: 30),
+              onPressed: () {},
+            ),
+          ],
+        ),
       ),
-    ),
-  );
-}
+    );
+  }
 }
