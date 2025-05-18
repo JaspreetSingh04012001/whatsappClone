@@ -298,8 +298,6 @@ class _StatusViewerState extends State<StatusViewer> {
             },
           ),
         );
-      default:
-        return const SizedBox.shrink();
     }
   }
 
