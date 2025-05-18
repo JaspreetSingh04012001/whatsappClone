@@ -22,11 +22,14 @@ class MyApp extends StatelessWidget {
 
         final bool isDarkMode = platformBrightness == Brightness.dark;
         return MaterialApp(
+
           title: 'Flutter Demo',
           theme: lightTheme(context),
+          debugShowCheckedModeBanner: false,
           home: SplashScreen(),
           darkTheme: darkTheme(context),
           themeMode: isDarkMode ? ThemeMode.dark : ThemeMode.light,
+
         );
       },
     );
