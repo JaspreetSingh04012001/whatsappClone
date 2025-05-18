@@ -5,8 +5,8 @@ import 'package:whatsappclone/Styles/icons.dart';
 
 // ignore: must_be_immutable
 class ChatScreen extends StatefulWidget {
-  ChatScreen({super.key, required this.userChatTile});
-  ChatTileUser userChatTile;
+  const ChatScreen({super.key, required this.userChatTile});
+  final ChatTileUser userChatTile;
 
   @override
   State<ChatScreen> createState() => _ChatScreenState();
@@ -26,35 +26,6 @@ class _ChatScreenState extends State<ChatScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      bottomNavigationBar: Container(
-        height: 100,
-        color: Colors.teal,
-        child: Row(
-          children: [
-            Expanded(child: TextField(controller: controller)),
-            IconButton(
-              icon: Icon(Icons.message),
-              onPressed: () {
-                controller.text;
-                if (controller.text.isNotEmpty) {
-                  setState(() {
-                    messages.add(
-                      Message(
-                        messageSendBy: "you",
-                        messageTime: DateTime.now(),
-                        isSeen: false,
-                        value: controller.text,
-                      ),
-                    );
-                  });
-                  controller.clear();
-                }
-                print(controller.text);
-              },
-            ),
-          ],
-        ),
-      ),
       appBar: AppBar(
         leadingWidth: 30,
         title: Row(
@@ -63,12 +34,11 @@ class _ChatScreenState extends State<ChatScreen> {
             Padding(
               padding: const EdgeInsets.fromLTRB(0, 0, 4, 0),
               child: CircleAvatar(
-                foregroundImage:
-                    widget.userChatTile.profilePicture == null
-                        ? null
-                        : NetworkImage(
-                          widget.userChatTile.profilePicture.toString(),
-                        ),
+                foregroundImage: widget.userChatTile.profilePicture == null
+                    ? null
+                    : NetworkImage(
+                        widget.userChatTile.profilePicture.toString(),
+                      ),
               ),
             ),
             Column(
@@ -78,7 +48,7 @@ class _ChatScreenState extends State<ChatScreen> {
                 Text(
                   widget.userChatTile.isOnline
                       ? "Online"
-                      : "Last seen at 5 :03 pm",
+                      : "Last seen at 5:03 pm",
                   style: TextStyle(fontSize: 8),
                 ),
               ],
@@ -136,4 +106,45 @@ class _ChatScreenState extends State<ChatScreen> {
       ),
     );
   }
+ Widget inputField() {
+  return SafeArea(
+    child: Container(
+      padding: EdgeInsets.symmetric(horizontal: 8, vertical: 6),
+      child: Row(
+        children: [
+          IconButton(
+            icon: Image.asset(AppIcons.plusIcon(), height: 35),
+            onPressed: () {},
+          ),
+          Expanded(
+            child: SizedBox(
+              height: 45.0,
+              child: TextField(
+                decoration: InputDecoration(
+                  contentPadding: EdgeInsets.symmetric(horizontal: 16, vertical: 14),
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(40),
+                    borderSide: BorderSide.none,
+                  ),
+                  suffixIcon: IconButton(
+                    icon: Image.asset(AppIcons.stickerIcon(), height: 30),
+                    onPressed: () {},
+                  ),
+                ),
+              ),
+            ),
+          ),
+          IconButton(
+            icon: Image.asset(AppIcons.cameraIcon(), height: 30),
+            onPressed: () {},
+          ),
+          IconButton(
+            icon: Image.asset(AppIcons.micIcon(), height: 30),
+            onPressed: () {},
+          ),
+        ],
+      ),
+    ),
+  );
+}
 }
