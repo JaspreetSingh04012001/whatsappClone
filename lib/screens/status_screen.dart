@@ -274,11 +274,14 @@ class _StatusViewerState extends State<StatusViewer> {
       case StatusType.text:
         return Container(
           color: Colors.grey,
-          child: Center(
-            child: Text(
-              status.content as String,
-              style: const TextStyle(fontSize: 24, color: Colors.white),
+          child: Padding(
+            padding: const EdgeInsets.all(10.0),
+            child: Center(
+              child: Text(
+                status.content as String,
+                style: const TextStyle(fontSize: 24, color: Colors.white),
 
+              ),
             ),
           ),
         );
