@@ -3,6 +3,7 @@ import 'package:intl/intl.dart';
 import 'package:whatsappclone/Data/Model/chat_tile_user.dart';
 import 'package:whatsappclone/Styles/theme.dart';
 import 'package:whatsappclone/screens/chat_screen.dart';
+import 'package:whatsappclone/widget/internalHomeScreen.dart';
 
 class ChatsScreen extends StatefulWidget {
   const ChatsScreen({super.key});
@@ -10,6 +11,7 @@ class ChatsScreen extends StatefulWidget {
   @override
   State<ChatsScreen> createState() => _ChatsScreenState();
 }
+
 List<ChatTileUser> users = [
   ChatTileUser(
     lastMessage: "Chhhll bhag",
@@ -38,12 +40,11 @@ var Newuser = users.add(
     lastMessageTime: DateTime.now(),
     username: "pagal",
     profilePicture:
-    "https://randomuser.me/api/portraits/women/${users.length}.jpg",
+        "https://randomuser.me/api/portraits/women/${users.length}.jpg",
   ),
 );
+
 class _ChatsScreenState extends State<ChatsScreen> {
-
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -63,12 +64,9 @@ class _ChatsScreenState extends State<ChatsScreen> {
         itemBuilder: (context, index) {
           return ListTile(
             onTap: () {
-              Navigator.of(context).push(
-                MaterialPageRoute(
-                  builder: (context) {
-                    return ChatScreen(userChatTile: users[index]);
-                  },
-                ),
+              naviagtionFunction(
+                context,
+                ChatScreen(userChatTile: users[index]),
               );
             },
             leading: CircleAvatar(

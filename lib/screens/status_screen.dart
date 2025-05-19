@@ -15,7 +15,7 @@ class MyStatus {
 }
 
 class StatusScreen extends StatefulWidget {
-  const StatusScreen({Key? key}) : super(key: key);
+  const StatusScreen({super.key});
   @override
   _StatusScreenState createState() => _StatusScreenState();
 }
@@ -181,8 +181,8 @@ class _StatusScreenState extends State<StatusScreen> {
           heroTag: 'edit',
           mini: true,
           backgroundColor: Colors.white,
-          child: const Icon(Icons.edit, color: Colors.grey),
           onPressed: _addText,
+          child: const Icon(Icons.edit, color: Colors.grey),
         ),
         const SizedBox(height: 12),
         FloatingActionButton(
@@ -197,7 +197,7 @@ class _StatusScreenState extends State<StatusScreen> {
 
 class StatusViewer extends StatefulWidget { // Changed to StatefulWidget
   final List<MyStatus> statuses;
-  const StatusViewer({required this.statuses, Key? key}) : super(key: key);
+  const StatusViewer({required this.statuses, super.key});
 
   @override
   _StatusViewerState createState() => _StatusViewerState();
