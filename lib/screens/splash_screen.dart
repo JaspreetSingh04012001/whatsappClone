@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:whatsappclone/Styles/icons.dart';
 import 'package:whatsappclone/screens/home_screen.dart';
-import 'package:whatsappclone/widget/internalHomeScreen.dart';
 
 class SplashScreen extends StatelessWidget {
   const SplashScreen({super.key});
