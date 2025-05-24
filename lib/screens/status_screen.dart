@@ -1,10 +1,13 @@
 import 'dart:async'; // Import for Timer
 import 'dart:io';
-import 'package:flutter/material.dart';
-import 'package:image_picker/image_picker.dart';
-import '../Data/Model/chat_tile_user.dart';
-import 'chats_screen.dart';
+
 import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:whatsappclone/chat/chatController.dart';
+
+import '../chat/Model/chat_tile_user.dart';
 
 enum StatusType { text, image, video }
 
@@ -24,7 +27,7 @@ class _StatusScreenState extends State<StatusScreen> {
   final picker = ImagePicker();
 
   final List<MyStatus> myStatuses = [];
-  final List<ChatTileUser> others = users;
+  final List<ChatTileUser> others = Get.find<ChatController>().users ?? [];
 
   Future<void> _addText() async {
     final text = await showModalBottomSheet<String>(
@@ -62,28 +65,35 @@ class _StatusScreenState extends State<StatusScreen> {
     }
   }
 
-  Future<void> _addMedia({required bool allowVideo, bool onlyImage = false}) async {
+  Future<void> _addMedia({
+    required bool allowVideo,
+    bool onlyImage = false,
+  }) async {
     StatusType? type;
     if (onlyImage) {
       type = StatusType.image;
     } else {
-      final choice = allowVideo
-          ? await showModalBottomSheet<StatusType>(
-        context: context,
-        builder: (c) => Wrap(children: [
-          ListTile(
-            leading: const Icon(Icons.photo),
-            title: const Text('Image'),
-            onTap: () => Navigator.pop(c, StatusType.image),
-          ),
-          ListTile(
-            leading: const Icon(Icons.videocam),
-            title: const Text('Video'),
-            onTap: () => Navigator.pop(c, StatusType.video),
-          ),
-        ]),
-      )
-          : null;
+      final choice =
+          allowVideo
+              ? await showModalBottomSheet<StatusType>(
+                context: context,
+                builder:
+                    (c) => Wrap(
+                      children: [
+                        ListTile(
+                          leading: const Icon(Icons.photo),
+                          title: const Text('Image'),
+                          onTap: () => Navigator.pop(c, StatusType.image),
+                        ),
+                        ListTile(
+                          leading: const Icon(Icons.videocam),
+                          title: const Text('Video'),
+                          onTap: () => Navigator.pop(c, StatusType.video),
+                        ),
+                      ],
+                    ),
+              )
+              : null;
       if (choice == null) return;
       type = choice;
     }
@@ -107,95 +117,115 @@ class _StatusScreenState extends State<StatusScreen> {
 
   void _showAllOptions() => showModalBottomSheet<void>(
     context: context,
-    builder: (c) => Wrap(children: [
-      ListTile(
-        leading: const Icon(Icons.edit),
-        title: const Text('Text'),
-        onTap: () {
-          Navigator.pop(c);
-          _addText();
-        },
-      ),
-      ListTile(
-        leading: const Icon(Icons.photo),
-        title: const Text('Image'),
-        onTap: () {
-          Navigator.pop(c);
-          _addMedia(allowVideo: false, onlyImage: true);
-        },
-      ),
-      ListTile(
-        leading: const Icon(Icons.videocam),
-        title: const Text('Video'),
-        onTap: () {
-          Navigator.pop(c);
-          _addMedia(allowVideo: true);
-        },
-      ),
-    ]),
+    builder:
+        (c) => Wrap(
+          children: [
+            ListTile(
+              leading: const Icon(Icons.edit),
+              title: const Text('Text'),
+              onTap: () {
+                Navigator.pop(c);
+                _addText();
+              },
+            ),
+            ListTile(
+              leading: const Icon(Icons.photo),
+              title: const Text('Image'),
+              onTap: () {
+                Navigator.pop(c);
+                _addMedia(allowVideo: false, onlyImage: true);
+              },
+            ),
+            ListTile(
+              leading: const Icon(Icons.videocam),
+              title: const Text('Video'),
+              onTap: () {
+                Navigator.pop(c);
+                _addMedia(allowVideo: true);
+              },
+            ),
+          ],
+        ),
   );
 
   @override
   Widget build(BuildContext context) {
     final lastStatus = myStatuses.isNotEmpty ? myStatuses.last : null;
     return Scaffold(
-      body: ListView(children: [
-        ListTile(
-          leading: GestureDetector(
-            onTap: _showAllOptions,
-            child: CircleAvatar(
-              radius: 26,
-              backgroundImage: (lastStatus != null &&
-                  (lastStatus.type == StatusType.image ||
-                      lastStatus.type == StatusType.video))
-                  ? kIsWeb
-                  ? MemoryImage(lastStatus.content as Uint8List)
-                  : FileImage(lastStatus.content as File)
-                  : null,
-              child: lastStatus == null || lastStatus.type == StatusType.text
-                  ? const Icon(Icons.add, size: 24)
-                  : null,
+      body: ListView(
+        children: [
+          ListTile(
+            leading: GestureDetector(
+              onTap: _showAllOptions,
+              child: CircleAvatar(
+                radius: 26,
+                backgroundImage:
+                    (lastStatus != null &&
+                            (lastStatus.type == StatusType.image ||
+                                lastStatus.type == StatusType.video))
+                        ? kIsWeb
+                            ? MemoryImage(lastStatus.content as Uint8List)
+                            : FileImage(lastStatus.content as File)
+                        : null,
+                child:
+                    lastStatus == null || lastStatus.type == StatusType.text
+                        ? const Icon(Icons.add, size: 24)
+                        : null,
+              ),
+            ),
+            title: const Text('My Status'),
+            subtitle: Text('${myStatuses.length} update(s)'),
+            onTap:
+                () => Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (_) => StatusViewer(statuses: myStatuses),
+                  ),
+                ),
+          ),
+          const Padding(
+            padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+            child: Text('Recent updates', style: TextStyle(color: Colors.grey)),
+          ),
+          ...others.map(
+            (u) => ListTile(
+              leading:
+                  u.profilePicture?.isNotEmpty == true
+                      ? CircleAvatar(
+                        radius: 26,
+                        backgroundImage: NetworkImage(u.profilePicture!),
+                      )
+                      : const CircleAvatar(radius: 26),
+              title: Text(u.username),
+              subtitle: Text(u.lastMessage),
             ),
           ),
-          title: const Text('My Status'),
-          subtitle: Text('${myStatuses.length} update(s)'),
-          onTap: () => Navigator.push(
-            context,
-            MaterialPageRoute(builder: (_) => StatusViewer(statuses: myStatuses)),
+        ],
+      ),
+      floatingActionButton: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          FloatingActionButton(
+            heroTag: 'edit',
+            mini: true,
+            backgroundColor: Colors.white,
+            onPressed: _addText,
+            child: const Icon(Icons.edit, color: Colors.grey),
           ),
-        ),
-        const Padding(
-          padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-          child: Text('Recent updates', style: TextStyle(color: Colors.grey)),
-        ),
-        ...others.map((u) => ListTile(
-          leading: u.profilePicture?.isNotEmpty == true
-              ? CircleAvatar(radius: 26, backgroundImage: NetworkImage(u.profilePicture!))
-              : const CircleAvatar(radius: 26),
-          title: Text(u.username),
-          subtitle: Text(u.lastMessage),
-        )),
-      ]),
-      floatingActionButton: Column(mainAxisSize: MainAxisSize.min, children: [
-        FloatingActionButton(
-          heroTag: 'edit',
-          mini: true,
-          backgroundColor: Colors.white,
-          onPressed: _addText,
-          child: const Icon(Icons.edit, color: Colors.grey),
-        ),
-        const SizedBox(height: 12),
-        FloatingActionButton(
-          heroTag: 'camera',
-          child: const Icon(Icons.camera_alt),
-          onPressed: () => _addMedia(allowVideo: true, onlyImage: false),
-        ),
-      ]),
+          const SizedBox(height: 12),
+          FloatingActionButton(
+            heroTag: 'camera',
+            child: const Icon(Icons.camera_alt),
+            onPressed: () => _addMedia(allowVideo: true, onlyImage: false),
+          ),
+        ],
+      ),
     );
   }
 }
 
-class StatusViewer extends StatefulWidget { // Changed to StatefulWidget
+class StatusViewer extends StatefulWidget {
+  // Changed to StatefulWidget
   final List<MyStatus> statuses;
   const StatusViewer({required this.statuses, super.key});
 
@@ -245,7 +275,8 @@ class _StatusViewerState extends State<StatusViewer> {
   @override
   Widget build(BuildContext context) {
     if (widget.statuses.isEmpty) {
-      return const IgnorePointer( // Makes the widget non-interactive
+      return const IgnorePointer(
+        // Makes the widget non-interactive
         child: Scaffold(
           body: Center(child: Text("")), // No text displayed
         ),
@@ -256,14 +287,14 @@ class _StatusViewerState extends State<StatusViewer> {
 
     return GestureDetector(
       onTapDown: (_) => _pauseTimer(),
-      onTapUp: (_) => Future.delayed(const Duration(milliseconds: 300), _resumeTimer),
-      onVerticalDragStart: (_) => Navigator.pop(context), // Swipe down to dismiss
+      onTapUp:
+          (_) =>
+              Future.delayed(const Duration(milliseconds: 300), _resumeTimer),
+      onVerticalDragStart:
+          (_) => Navigator.pop(context), // Swipe down to dismiss
       child: Scaffold(
         body: Stack(
-          children: [
-            _buildStatusContent(currentStatus),
-            _buildProgressBar(),
-          ],
+          children: [_buildStatusContent(currentStatus), _buildProgressBar()],
         ),
       ),
     );
@@ -280,7 +311,6 @@ class _StatusViewerState extends State<StatusViewer> {
               child: Text(
                 status.content as String,
                 style: const TextStyle(fontSize: 24, color: Colors.white),
-
               ),
             ),
           ),
@@ -292,7 +322,11 @@ class _StatusViewerState extends State<StatusViewer> {
       case StatusType.video:
         return Center(
           child: IconButton(
-            icon: const Icon(Icons.play_circle_filled, size: 64, color: Colors.white),
+            icon: const Icon(
+              Icons.play_circle_filled,
+              size: 64,
+              color: Colors.white,
+            ),
             onPressed: () {
               // Implement video playback here (consider using a video player plugin)
             },
@@ -309,10 +343,12 @@ class _StatusViewerState extends State<StatusViewer> {
       left: 0,
       right: 0,
       child: LinearProgressIndicator(
-        value: (widget.statuses.isNotEmpty) ? (_currentIndex + 1) / widget.statuses.length : 0,
+        value:
+            (widget.statuses.isNotEmpty)
+                ? (_currentIndex + 1) / widget.statuses.length
+                : 0,
 
         valueColor: const AlwaysStoppedAnimation<Color>(Colors.white),
-
       ),
     );
   }
