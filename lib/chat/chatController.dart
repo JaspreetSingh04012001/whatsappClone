@@ -21,6 +21,28 @@ class ChatController extends GetxController {
     });
   }
 
+chatDelete(){}
+chatMute(){}
+chatPin(){}
+chatArchieve(){}
+selectAllChat(){}
+chatLock(){}
+chatFavourite(){}
+addChatBroadcast(){}
+addchatList(){}
+chatBlock(){}
+chatMarkAsRead(){}
+chatMarkAsUnread(){}
+chatViewContact(){}
+
+
+
+
+
+
+
+
+
   /*
 Newuser = users.add(
   ChatTileUser(

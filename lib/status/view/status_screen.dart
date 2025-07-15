@@ -7,7 +7,7 @@ import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:whatsappclone/chat/chatController.dart';
 
-import '../chat/Model/chat_tile_user.dart';
+import '../../chat/Model/chat_tile_user.dart';
 
 enum StatusType { text, image, video }
 

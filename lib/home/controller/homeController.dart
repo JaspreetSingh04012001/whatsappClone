@@ -5,7 +5,7 @@ import 'package:whatsappclone/chat/chatController.dart';
 import 'package:whatsappclone/chat/view/chats_screen.dart';
 import 'package:whatsappclone/screens/calls_screen.dart';
 import 'package:whatsappclone/screens/community_screens.dart';
-import 'package:whatsappclone/screens/status_screen.dart';
+import 'package:whatsappclone/status/view/status_screen.dart';
 
 class Homecontroller extends GetxController {
   List<Widget> internalScreens = [
@@ -28,8 +28,19 @@ class Homecontroller extends GetxController {
     return internalScreens[selectedScreenIndex];
   }
 
-chatDelete(){
-  
-}
+// chatDelete(){}
+// chatMute(){}
+// chatPin(){}
+// chatArchieve(){}
+// selectAllChat(){}
+// chatLock(){}
+// chatFavourite(){}
+// addChatBroadcast(){}
+// addchatList(){}
+// chatBlock(){}
+// chatMarkAsRead(){}
+// chatMarkAsUnread(){}
+// chatViewContact(){}
+
 
 }
