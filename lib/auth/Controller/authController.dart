@@ -9,6 +9,7 @@ import 'package:whatsappclone/auth/View/PhoneNumber.dart';
 import 'package:whatsappclone/auth/View/readyProfile.dart';
 import 'package:whatsappclone/auth/View/splash_screen.dart';
 import 'package:whatsappclone/home/home.dart';
+// import 'package:whatsappclone/screens/home_screen.dart';
 
 class Authcontroller extends GetxController {
   String tempPhoneNumber = "";
@@ -48,6 +49,7 @@ class Authcontroller extends GetxController {
   readyProfile() {
     box.write("isUserLoggedIn", true);
     Get.offAll(Home());
+    // Get.to(() => Home());
   }
 
   logOut() {
@@ -78,4 +80,21 @@ class Authcontroller extends GetxController {
       Get.dialog(AlertDialog(title: Text("Wrong Otp")));
     }
   }
+
+
+  updateUserProfilePicture() {}
+  updateUserName() {}
+  updateUserStatus() {}
+  updateUserAbout() {}
+  updateUserPhoneNumber() {}
+//  updateUserEmail() {}
+ // updateUserPassword() {}
+
+dataBackUp(){}
+deleteUserAccount(){}
+deleteChat(){}
+
+
+
+
 }
