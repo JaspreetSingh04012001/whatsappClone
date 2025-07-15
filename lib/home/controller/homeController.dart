@@ -27,4 +27,9 @@ class Homecontroller extends GetxController {
   Widget getInternalScreen() {
     return internalScreens[selectedScreenIndex];
   }
+
+chatDelete(){
+  
+}
+
 }
