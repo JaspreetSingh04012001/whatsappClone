@@ -1,9 +1,37 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get_navigation/src/root/get_material_app.dart';
+import 'package:get/instance_manager.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:whatsappclone/Styles/theme.dart';
-import 'package:whatsappclone/screens/splash_screen.dart';
+import 'package:whatsappclone/auth/Controller/authController.dart';
+import 'package:whatsappclone/auth/Repository/authRepository.dart';
+import 'package:whatsappclone/auth/View/splash_screen.dart';
+import 'package:whatsappclone/home/controller/homeController.dart';
 
-void main() {
-  runApp(const MyApp());
+import 'firebase_options.dart';
+
+Future<void> init() async {
+  await GetStorage.init();
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+}
+
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  ).then((app) {
+    GetStorage box = GetStorage("Authbox");
+    Get.lazyPut(
+      () => Authcontroller(authrepository: Authrepository(), box: box),
+      fenix: true,
+    );
+    Get.lazyPut(() => Homecontroller(), fenix: true);
+
+    runApp(const MyApp());
+  });
+
+  // Get.lazyPut(() => ChatController(chatRepo: Chatrepository()), fenix: true);
 }
 
 class MyApp extends StatelessWidget {
@@ -14,22 +42,12 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return Builder(
       builder: (context) {
-        // This builder gives access to context before MaterialApp is built
-
-        // Use WidgetsBinding to get platform brightness
-        final Brightness platformBrightness =
-            WidgetsBinding.instance.platformDispatcher.platformBrightness;
-
-        final bool isDarkMode = platformBrightness == Brightness.dark;
-        return MaterialApp(
-
+        return GetMaterialApp(
           title: 'Flutter Demo',
           theme: lightTheme(context),
           debugShowCheckedModeBanner: false,
           home: SplashScreen(),
           darkTheme: darkTheme(context),
-          themeMode: isDarkMode ? ThemeMode.dark : ThemeMode.light,
-
         );
       },
     );

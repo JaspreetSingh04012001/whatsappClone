@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:whatsappclone/Data/Model/chat_tile_user.dart';
+import 'package:whatsappclone/chat/Model/chat_tile_user.dart';
 import 'package:whatsappclone/Data/Model/message.dart';
 import 'package:whatsappclone/Styles/icons.dart';
 
